@@ -7,13 +7,14 @@ import jakarta.persistence.Id;
 @Entity
 public class Animals {
 
+    Animals(){}
+
     private @Id
     @GeneratedValue Long id;
     private String animalName;
     private String Description;
     private int Quantity; 
 
-    Animals(){}
     
     public Animals(String animalName, String description, int quantity) {
         this.animalName = animalName;
