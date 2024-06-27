@@ -13,7 +13,7 @@ public class Animals {
     @GeneratedValue Long id;
     private String animalName;
     private String Description;
-    private int Quantity; 
+    private int Quantity;
 
     
     public Animals(String animalName, String description, int quantity) {
