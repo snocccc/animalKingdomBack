@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinoypliks.co.animalkingdom.Model.order_Item;
@@ -14,6 +15,7 @@ import com.pinoypliks.co.animalkingdom.NotFoundException.OrderItemNotFoundExcept
 import com.pinoypliks.co.animalkingdom.Repository.OrderItemRepository;
 
 @RestController
+@RequestMapping("api/v1/item")
 public class OrderItemController {
 
     OrderItemRepository repo;
@@ -22,18 +24,18 @@ public class OrderItemController {
         this.repo = repo;
     }
 
-    @GetMapping("/OrderItem")
+    @GetMapping("/all")
     public List<order_Item>getOrder_Items(){
         return repo.findAll();
     }
 
-    @GetMapping("/OrderItem/{id}")
+    @GetMapping("/{id}")
     public order_Item getOrder_Item(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new OrderItemNotFoundException(id));
     }
 
-    @PostMapping("/OrderItem/New")
+    @PostMapping("/new")
     public String addOrder_Item(@RequestBody order_Item newOrder_Item){
         repo.save(newOrder_Item);
         return "Your Order Item is Added";

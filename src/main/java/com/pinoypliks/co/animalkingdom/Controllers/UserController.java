@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinoypliks.co.animalkingdom.Model.User;
@@ -20,7 +21,7 @@ import com.pinoypliks.co.animalkingdom.Repository.UserRepository;
 
 
 @RestController
-
+@RequestMapping("api/v1/user")
 public class UserController{
 
     UserRepository repo;
@@ -29,26 +30,26 @@ public class UserController{
         this.repo = repo;
     }
 
-    @GetMapping("/User")
+    @GetMapping("/all")
     public List<User>getUser(){
         return repo.findAll();
     }
     
     
-    @GetMapping("/User/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new UserNotFoundException(id));
       
     }
 
-    @PostMapping("/User/new")
+    @PostMapping("/new")
     public String addUser(@RequestBody User newUser){
         repo.save(newUser);
         return "A new User is Added, KABOOM!!!";
     }
 
-     @PutMapping("/User/edit/{id}")
+     @PutMapping("/edit/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User newUser){
         return repo.findById(id)
         .map(User ->{

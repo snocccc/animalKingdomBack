@@ -1,30 +1,30 @@
 package com.pinoypliks.co.animalkingdom.DTO;
 
 public class LoginRequest {
-    private String UsernameorEmail;
-    private String Password;
+    private String usernameoremail;
+    private String password;
 
     LoginRequest(){}
 
-    public LoginRequest(String usernameorEmail, String password) {
-        UsernameorEmail = usernameorEmail;
-        Password = password;
+    public LoginRequest(String usernameoremail, String password) {
+        this.usernameoremail = usernameoremail;
+        this.password = password;
     }
 
     public String getUsernameorEmail() {
-        return UsernameorEmail;
+        return usernameoremail;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setUsernameorEmail(String usernameorEmail) {
-        UsernameorEmail = usernameorEmail;
+    public void setUsernameorEmail(String usernameoremail) {
+        this.usernameoremail = usernameoremail;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     

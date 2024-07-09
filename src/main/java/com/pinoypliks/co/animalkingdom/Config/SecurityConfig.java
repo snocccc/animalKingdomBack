@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -22,6 +24,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    static PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
     throws Exception {
         return configuration.getAuthenticationManager();
@@ -32,6 +39,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(
             (authorize) -> authorize.requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+            .requestMatchers("/api/v1/auth/**").permitAll()
+
             .anyRequest().authenticated()
 
 

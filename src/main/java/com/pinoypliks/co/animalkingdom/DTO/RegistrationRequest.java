@@ -1,40 +1,40 @@
 package com.pinoypliks.co.animalkingdom.DTO;
 
 public class RegistrationRequest {
-    private String Username;
-    private String Email;
-    private String Password;
+    private String username;
+    private String email;
+    private String password;
 
     RegistrationRequest(){}
 
     public RegistrationRequest(String username, String email, String password) {
-        Username = username;
-        Email = email;
-        Password = password;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     

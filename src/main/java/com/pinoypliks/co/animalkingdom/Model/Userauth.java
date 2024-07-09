@@ -1,6 +1,8 @@
 package com.pinoypliks.co.animalkingdom.Model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -8,6 +10,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -19,11 +22,11 @@ public class Userauth {
 
     private @Id
     @GeneratedValue Long id;
-    String Username;
-    String Email;
-    String Password;
+    String username;
+    String email;
+    String password;
 
-    @ManyToMany(fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -32,9 +35,9 @@ public class Userauth {
     Userauth(){}
 
     public Userauth(String username, String email, String password) {
-        Username = username;
-        Email = email;
-        Password = password;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -42,15 +45,15 @@ public class Userauth {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public Set<Role> getRoles() {
@@ -58,15 +61,15 @@ public class Userauth {
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public void setRoles(Set<Role> roles) {

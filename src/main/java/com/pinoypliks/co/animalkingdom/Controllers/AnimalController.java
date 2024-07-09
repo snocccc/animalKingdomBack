@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinoypliks.co.animalkingdom.Model.Animals;
@@ -16,6 +17,7 @@ import com.pinoypliks.co.animalkingdom.Repository.AnimalRepository;
 
 
 @RestController
+@RequestMapping("api/v1/Animal")
 public class AnimalController {
 
     AnimalRepository repo;
@@ -25,11 +27,11 @@ public class AnimalController {
     }
 
 
-    @GetMapping("/Animals")
+    @GetMapping("/all")
     public List<Animals>getAnimals(){
         return repo.findAll();
     }
-    @GetMapping("/animal/{id}")
+    @GetMapping("/{id}")
     public Animals getAnimal(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new AnimalNotFoundException(id));
@@ -37,14 +39,14 @@ public class AnimalController {
     }
  
 
-    @PostMapping("/Animals/new")
+    @PostMapping("/new")
     public String addAnimal(@RequestBody Animals newAnimals){
         repo.save(newAnimals);
         return "A new Animals is addded, Yehey!!!";
     }
 
 
-    @PutMapping("/animals/edit/{id}")
+    @PutMapping("/edit/{id}")
     public Animals updateAnimal(@PathVariable Long id, @RequestBody Animals newAnimals){
         return repo.findById(id)
         .map(animals ->{
@@ -58,7 +60,7 @@ public class AnimalController {
     }
 
 
-    @DeleteMapping("/animals/delete/{id}") 
+    @DeleteMapping("/delete/{id}") 
     public String deleteAnimal(@PathVariable Long id){
         repo.deleteById(id);
         return "A Animal is Dead";
